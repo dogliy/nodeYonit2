@@ -18,7 +18,7 @@ module.exports={
                         console.log(err);
                       
                 });  
-                connection.disconnect();
+            
                 
         },
         sendById(req,res,next){
@@ -35,13 +35,7 @@ module.exports={
                         console.log(error);
                      
             });
-            connection.disconnect()
-            .then(()=>{
-                console.log('disconnected');
-            }).catch(()=>{
-                console.log('there was a problem while disconnect');
-
-            });
+    
 
         },
         AddNewPlayerToTournament(req,res,next){
@@ -94,7 +88,7 @@ module.exports={
                                 console.log(error);
                         });
                 }
-                connection.disconnect();
+             
               
         },
         findBetweendates(req,res,next){
@@ -169,6 +163,6 @@ module.exports={
                         console.log(error);
                       
                 });
-                connection.disconnect();
+              
         }
 }
