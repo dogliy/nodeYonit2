@@ -1,7 +1,7 @@
 {
-  "name": "nir adler",
+  "name": "nodeyonit2",
   "version": "1.0.0",
-  "description": "targil 1",
+  "description": "",
   "main": "index.js",
   "dependencies": {
     "express": "^4.16.4",
@@ -10,9 +10,17 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node index.js",
+    "start":"node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dogliy/nodeYonit2.git"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dogliy/nodeYonit2/issues"
+  },
+  "homepage": "https://github.com/dogliy/nodeYonit2#readme"
 }
