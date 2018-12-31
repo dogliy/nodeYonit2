@@ -18,13 +18,8 @@ module.exports={
                         console.log(err);
                       
                 });  
-                connection.disconnect()
-                .then(()=>{
-                    console.log('disconnected');
-                }).catch(()=>{
-                    console.log('there was a problem while disconnect');
-    
-                });
+                connection.disconnect();
+                
         },
         sendById(req,res,next){
             const tournamentId=req.query.tournamentId;
@@ -99,13 +94,8 @@ module.exports={
                                 console.log(error);
                         });
                 }
-                connection.disconnect()
-                .then(()=>{
-                    console.log('disconnected');
-                }).catch((error)=>{
-                    console.log(error);
-    
-                });
+                connection.disconnect();
+              
         },
         findBetweendates(req,res,next){
                 connection.then(()=>{
@@ -179,12 +169,6 @@ module.exports={
                         console.log(error);
                       
                 });
-                connection.disconnect()
-                 .then(()=>{
-                          console.log('disconnected');
-                 }).catch(()=>{
-                          console.log('there was a problem while disconnect');
-
-                });
+                connection.disconnect();
         }
 }
