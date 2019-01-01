@@ -1,10 +1,11 @@
 const Tournament=require('./schema');
 const connection=require('./connect');
+const mongoose=require('mongoose');
 var db=connection;
 
 
 module.exports={
-                sendAllTournaments(req,res,next){
+         sendAllTournaments(req,res,next){
                 connection.then(()=>{
                         const result= Tournament.find({},(err,result)=>{
                             if(err){
@@ -16,27 +17,23 @@ module.exports={
                         });
                 }).catch((err)=>{
                         console.log(err);
-                      
-                });  
-            
-                
+                });            
         },
-        sendById(req,res,next){
-            const tournamentId=req.query.tournamentId;
+        getTournamentById(req,res,next){
+            const tId=req.params.tournamentId;
             connection.then(()=>{
-                    Tournament.find({tournamentId},(err,result)=>{
+                    Tournament.find({tournamentId:tId},(err,result)=>{
                         if(err){
                                 res.status(404).send('not found');
                         }else{
                                 res.json(result);
                         }   
+                       
                     });
             }).catch((error)=>{
-                        console.log(error);
-                     
+                        console.log(error);            
             });
-    
-
+        
         },
         AddNewPlayerToTournament(req,res,next){
                 const tournamentId=req.body.tournamentId;
@@ -87,9 +84,7 @@ module.exports={
                         }).catch((error)=>{
                                 console.log(error);
                         });
-                }
-             
-              
+                }   
         },
         findBetweendates(req,res,next){
                 connection.then(()=>{
@@ -162,7 +157,54 @@ module.exports={
                 }).catch((error)=>{
                         console.log(error);
                       
-                });
-              
+                });        
+        },
+        addTournament(req,res,next){
+                if(typeof req.body.tournamentId=='undefined' || typeof req.body.tournamentName=='undefined' || typeof req.body.date=='undefined' || typeof req.body.location=='undefined'){
+                        res.send('you did not send all parameters ');
+                    }else{
+
+                                Tournament.find({},(err,result)=>{
+                                        
+                                        if(err){
+                                                res.send(`there was an error: ${err}`);
+                                        }else{
+                                             console.log(result.length);
+                                             var flag=0;
+                                             for(let i=0;i<result.length;i++){
+                                                if(result[i].tournamentId==req.body.tournamentId)
+                                                        flag=1;
+                                             }
+                                             if(flag==1){
+
+                                                console.log('tournament Id exist send different id');
+                                                res.send('tournament Id exist send different id');
+
+                                             }else{
+                                                const newTournament=new Tournament({
+                                                        tournamentId:req.body.tournamentId,
+                                                        tournamentName:req.body.tournamentName,
+                                                        date:req.body.date,
+                                                        location:req.body.location,
+                                                        competitor:[]
+                                                });
+
+                                                newTournament.save()
+                                                .then(()=>{
+                                                        console.log('you addnew tournament');
+                                                        res.send('you addnew tournament');
+                                                }).catch((err)=>{
+                                                        console.log(err);
+                                                        res.send('error');
+
+                                                });
+
+
+                                             }
+                                        }
+                                });
+                    }
+
         }
+        
 }

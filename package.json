@@ -1,7 +1,7 @@
 {
   "name": "nodeyonit2",
   "version": "1.0.0",
-  "description": "",
+  "description": "nir adler - National Scoreboard",
   "main": "index.js",
   "dependencies": {
     "express": "^4.16.4",

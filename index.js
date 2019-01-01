@@ -3,28 +3,25 @@ const express=require('express');
 const port=process.env.PORT || 5000;
 const app=express();
 const functions=require('./files/functions');
+const error=require('./files/error');
 
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
-app.get('/',(req,res,next)=>{
-    functions.sendAllTournaments(req,res,next);
-   
-});
-app.get('/tournament/:tournamentId',(req,res,next)=>{
-    functions.sendById(req,res,next);
-    
-});
-app.post('/AddNewPlayerToTournament',(req,res,next)=>{
-    functions.AddNewPlayerToTournament(req,res,next);
-   
-});
-app.get('/findBetweendates',(req,res,next)=>{
-    functions.findBetweendates(req,res,next);
-    
-});
+app.get('/aaa',error("dani"));
+
+app.get('/',error(functions.sendAllTournaments));
+
+app.get('/tournament/:tournamentId',error(functions.getTournamentById));
+
+app.post('/AddNewPlayerToTournament',error( functions.AddNewPlayerToTournament));
+
+app.get('/findBetweendates',error(functions.findBetweendates));
+
+app.post('/addTournament',error(functions.addTournament));
+
 app.all('*',(req,res)=>{
     res.send('cannot find routh try again');
 });
